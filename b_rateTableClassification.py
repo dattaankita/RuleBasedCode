@@ -1,5 +1,6 @@
 import os
 import re
+import csv
 
 def predict(filePath):
     """Predicts whether the table is a rate table or not
@@ -98,7 +99,15 @@ if __name__ == "__main__":
         result = predict(filePath)
         if result==1:
             # print('It is Rate table')
-            print(file + ":True")
+            #print(file + ":True")
+            arr = [file, "True"]
         else:
             # print('It is not Rate table')
-            print(file + ":False")
+            #print(file + ":False")
+            arr = [file, "False"]
+        with open("output.csv", 'a') as csvFile:
+            writer = csv.writer(csvFile)
+            writer.writerow(arr)
+            
+        csvFile.close()
+            
